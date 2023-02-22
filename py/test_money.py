@@ -1,4 +1,6 @@
 import unittest
+import functools 
+import operator
 
 class Dollar: 
     def __init__(self, amount):
@@ -21,6 +23,18 @@ class Money:
     def divide(self, divisor): 
         return Money(self.amount / divisor, self.currency)
     
+class Portfolio:
+    def __init__(self): 
+        self.moneys = []
+        
+    def add(self, *moneys):
+        self.moneys.extend(moneys)
+
+    def evaluate(self, currency):
+        # total = functools.reduce(operator.add, map(lambda m: m.amount, self.moneys))
+        total = functools.reduce(operator.add, map(lambda m: m.amount, self.moneys), 0)
+        return Money(total, currency)
+
 class TestMoney(unittest.TestCase): 
     
     def testMultiplication(self):
@@ -46,6 +60,14 @@ class TestMoney(unittest.TestCase):
         
         self.assertEqual(expectedMoneyAfterDivision.amount, actualMoneyAfterDivision.amount)
         self.assertEqual(expectedMoneyAfterDivision.currency, actualMoneyAfterDivision.currency)
+    
+    def testAddition(self):
+        fiveDollars = Money(5, "USD") 
+        tenDollars = Money(10, "USD") 
+        fifteenDollars = Money(15, "USD") 
+        portfolio = Portfolio() 
+        portfolio.add(fiveDollars, tenDollars)
+        self.assertEqual(fifteenDollars, portfolio.evaluate("USD"))
 
 
 
