@@ -1,9 +1,10 @@
 const assert = require('assert')
 const Money = require('./money')
 const Portfolio = require('./portfolio')
+
+/*
 // Chapter 1. Create Dollar class instance
 // Chapter 2. Replace Dollar with money to keep it DRY
-
 const fiveDollar = new Money(5)
 const tenDollar = fiveDollar.times(2)
 const fifteenDollar = fiveDollar.times(3)
@@ -34,6 +35,15 @@ let portfolio = new Portfolio()
 portfolio.add(fiveDollar, tenDollar)
 assert.deepStrictEqual(portfolio.evaluate('USD'), fifteenDollars)
 console.log('testing adding two dollar passed')
+*/
 
+// Chapter 8. 新增轉換不同匯率的方法（先新增從歐元 => 美元的轉換，幫助我們搭好鷹架）
+let fiveDollars = new Money(5, 'USD')
+let tenEuros = new Money(10, 'EUR')
+let portfolio = new Portfolio()
+portfolio.add(fiveDollars, tenEuros)
+let expectedValue = new Money(17, 'USD')
+assert.deepStrictEqual(portfolio.evaluate('USD'), expectedValue)
+console.log('testing adding USD & EUR dollars')
 
 
