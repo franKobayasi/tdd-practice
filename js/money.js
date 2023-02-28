@@ -13,7 +13,7 @@ class Money {
             this.amount / divisor, this.currency
         )
     }
-  }
+}
   
-  module.exports = Money
+module.exports = Money
   

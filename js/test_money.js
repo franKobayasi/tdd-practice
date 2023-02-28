@@ -1,5 +1,6 @@
 const assert = require('assert')
 const Money = require('./money')
+const Portfolio = require('./portfolio')
 // Chapter 1. Create Dollar class instance
 // Chapter 2. Replace Dollar with money to keep it DRY
 
@@ -26,3 +27,13 @@ let actualMoneyAfterDivision = originalMoney.divide(4)
 let expectedMoneyAfterDivision = new Money(1000.5, 'KRW')
 assert.deepStrictEqual(actualMoneyAfterDivision, expectedMoneyAfterDivision)
 console.log('testing divide function passed')
+
+// Chapter 3. 相加兩個不同匯率的 Money 物件，因此新增 instance 來處理此問題
+let fifteenDollars = new Money(15, 'USD')
+let portfolio = new Portfolio()
+portfolio.add(fiveDollar, tenDollar)
+assert.deepStrictEqual(portfolio.evaluate('USD'), fifteenDollars)
+console.log('testing adding two dollar passed')
+
+
+
